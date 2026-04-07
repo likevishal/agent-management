@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AgentController extends Controller
 {
@@ -35,14 +36,16 @@ class AgentController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'password' => 'required'
         ]);
 
         Agent::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'address' => $request->address
+            'address' => $request->address,
+            'password' => Hash::make($request->password)
         ]);
 
         return redirect('/agents')->with('success', 'Agent added successfully');

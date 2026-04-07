@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Agent extends Model
+class Agent extends Authenticatable
 {
     //
+
+    use Notifiable;
 
     protected $fillable = [
         'name',
         'email',
         'phone',
-        'address'
+        'address',
+        'password'
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 }

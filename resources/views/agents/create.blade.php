@@ -23,6 +23,9 @@
     Email:
     <input type="text" name="email"> <br>
 
+    Password:
+    <input type="password" name="password"> <br>
+
     Phone:
     <input type="text" name="phone"> <br>
 
