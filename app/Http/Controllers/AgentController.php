@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AgentController extends Controller
 {
     public function index() {
-        $agents = Agent::all();
+        $agents = Agent::paginate(5);
         return view('agents.index', compact('agents'));
     }
 
@@ -32,7 +32,7 @@ class AgentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect('/agents');
+        return redirect('/agents')->with('success','Agent added successfully');
     }
 
     public function edit($id) {
@@ -58,14 +58,14 @@ class AgentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect('/agents');
+        return redirect('/agents')->with('success','Agent updated successfully');
     }
 
     public function destroy($id) {
         $agent = Agent::findOrFail($id);
         $agent->delete();
 
-        return redirect('/agents');
+        return redirect('/agents')->with('success','Agent deleted successfully');
 
     }
 }

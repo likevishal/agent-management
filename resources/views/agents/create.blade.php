@@ -1,6 +1,20 @@
+@extends('layouts.app')
+
+@section('content')
+
 <h1>Add Agent</h1>
 
-<form method="post" action="/agents/store" >
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($erros->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<form method="POST" action="/agents">
     @csrf
 
     Name:
@@ -13,7 +27,9 @@
     <input type="text" name="phone"> <br>
 
     Address:
-    <input type="text" name="address" > <br>
+    <input type="text" name="address"> <br>
 
     <button type="submit"> Save </button>
 </form>
+
+@endsection
