@@ -7,16 +7,29 @@ use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
-    public function index() {
-        $agents = Agent::paginate(5);
-        return view('agents.index', compact('agents'));
+    public function index(Request $request)
+    {
+
+        $query = Agent::query();
+
+        $search = $request->search;
+
+        $agents = Agent::when($search, function ($query, $search) {
+            return $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        })->paginate(5);
+        return view('agents.index', compact('agents', 'search'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('agents.create');
     }
 
-    public static function store(Request $request) {
+    public static function store(Request $request)
+    {
 
         $request->validate([
             'name' => 'required',
@@ -32,15 +45,17 @@ class AgentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect('/agents')->with('success','Agent added successfully');
+        return redirect('/agents')->with('success', 'Agent added successfully');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $agent = Agent::findOrFail($id);
-        return view('agents.edit',compact('agent'));
+        return view('agents.edit', compact('agent'));
     }
 
-    public function update(Request $request,$id) {
+    public function update(Request $request, $id)
+    {
 
         $request->validate([
             'name' => 'required',
@@ -58,14 +73,14 @@ class AgentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect('/agents')->with('success','Agent updated successfully');
+        return redirect('/agents')->with('success', 'Agent updated successfully');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $agent = Agent::findOrFail($id);
         $agent->delete();
 
-        return redirect('/agents')->with('success','Agent deleted successfully');
-
+        return redirect('/agents')->with('success', 'Agent deleted successfully');
     }
 }

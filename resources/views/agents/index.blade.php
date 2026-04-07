@@ -7,6 +7,17 @@
 
 <a href="/agents/create">Add Agent</a>
 
+<form method="GET" action="/agents" class="mb-3">
+    <input 
+        type="text" 
+        name="search"
+        placeholder="Search by name or email"
+        value="{{ $search ?? '' }}"
+    >
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
 <table border="1">
     <tr>
         <th>ID</th>
@@ -27,7 +38,7 @@
                 class="btn btn-success btn-sm">
                 Edit
             </a>
-          
+
             <form action="/agents/{{$agent->id}}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
@@ -44,6 +55,6 @@
 </table>
 
 <!-- 👇 Put pagination here -->
-{{ $agents->links() }}
+{{ $agents->appends(['search' => $search ?? ''])->links() }}
 
 @endsection
