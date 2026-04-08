@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AgentAuthController;
 
+use App\Http\Controllers\AdminAuthController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -12,6 +14,27 @@ Route::get('/', function () {
 Route::get('/hello',function() {
     return "Hello Laravel";
 });
+
+// ADMIN LOGIN ROUTE START 
+
+//login
+Route::get('/admin/login',[AdminAuthController::class,'showLogin']);
+Route::post('/admin/login',[AdminAuthController::class,'login']);
+
+//protected
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('/admin/dashboard',function(){
+        return "Admin dashboard";
+    });
+});
+
+
+//logout 
+
+Route::post('/admin/logout',[AdminAuthController::class,'logout']);
+
+// ADMIN LOGIN ROUTE END
 
 Route::get('/agent/login',[AgentAuthController::class,'showLogin']);
 Route::post('/agent/login',[AgentAuthController::class,'login']);
