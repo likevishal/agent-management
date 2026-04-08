@@ -46,7 +46,7 @@ class AgentController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect('/agents')->with('success', 'Agent added successfully');
+        return redirect('admin/agents')->with('success', 'Agent added successfully');
     }
 
     public function edit($id)
@@ -74,7 +74,7 @@ class AgentController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect('/agents')->with('success', 'Agent updated successfully');
+        return redirect('admin/agents')->with('success', 'Agent updated successfully');
     }
 
     public function destroy($id)

@@ -12,6 +12,7 @@ class Agent extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
+        'admin_id',
         'name',
         'email',
         'phone',

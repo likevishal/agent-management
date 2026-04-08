@@ -8,7 +8,7 @@
     Add Agent
 </a>
 
-<table class="table table-bordered">
+<table class="table table-striped table-hover">
 <tr>
     <th>ID</th>
     <th>Name</th>
@@ -24,9 +24,9 @@
     <td>{{ $agent->email }}</td>
     <td>{{ $agent->phone }}</td>
     <td>
-        <a href="{{ route('agents.edit', $agent->id) }}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{{ route('admin.agents.edit', $agent->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
-        <form action="{{ route('agents.destroy', $agent->id) }}" method="POST" style="display:inline;">
+        <form action="{{ route('admin.agents.destroy', $agent->id) }}" method="POST" style="display:inline;">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger btn-sm">Delete</button>

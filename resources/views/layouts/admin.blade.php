@@ -1,31 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<nav class="navbar navbar-dark bg-dark p-3">
-    <span class="text-white">Admin Panel</span>
+    <div class="d-flex">
 
-    <form method="POST" action="/admin/logout">
-        @csrf
-        <button class="btn btn-danger btn-sm">Logout</button>
-    </form>
-</nav>
+        <!-- 🔹 Sidebar -->
+        <div class="bg-dark text-white p-3" style="width: 250px; min-height: 100vh;">
+            <h4>Admin Panel</h4>
 
-<div class="container mt-4">
+            <ul class="nav flex-column mt-4">
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-secondary' : '' }}">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.agents.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('admin.agents.*') ? 'bg-secondary' : '' }}">
+                        Agents
+                    </a>
+                </li>
+
+            </ul>
         </div>
-    @endif
 
-    @yield('content')
+        <!-- 🔹 Main Content -->
+        <div class="flex-grow-1">
 
-</div>
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-light bg-light px-3">
+                <span>Welcome, {{ auth('admin')->user()->name }}</span>
+
+                <form method="POST" action="/admin/logout">
+                    @csrf
+                    <button class="btn btn-danger btn-sm">Logout</button>
+                </form>
+            </nav>
+
+            <!-- Page Content -->
+            <div class="p-4">
+
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @yield('content')
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>
