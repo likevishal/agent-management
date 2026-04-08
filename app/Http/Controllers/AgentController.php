@@ -82,6 +82,6 @@ class AgentController extends Controller
         $agent = Agent::where('admin_id',Auth::guard('admin')->id())->findOrFail($id);
         $agent->delete();
 
-        return redirect('/agents')->with('success', 'Agent deleted successfully');
+        return redirect('admin/agents')->with('success', 'Agent deleted successfully');
     }
 }

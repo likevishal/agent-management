@@ -18,7 +18,7 @@ Route::get('/hello',function() {
 // ADMIN LOGIN ROUTE START 
 
 //login
-Route::get('/admin/login',[AdminAuthController::class,'showLogin']);
+Route::get('/admin/login',[AdminAuthController::class,'showLogin'])->name('admin.login');
 Route::post('/admin/login',[AdminAuthController::class,'login']);
 
 //protected
@@ -38,7 +38,7 @@ Route::post('/admin/logout',[AdminAuthController::class,'logout']);
 
 // ADMIN LOGIN ROUTE END
 
-Route::get('/agent/login',[AgentAuthController::class,'showLogin']);
+Route::get('/agent/login',[AgentAuthController::class,'showLogin'])->name('agent.login');
 Route::post('/agent/login',[AgentAuthController::class,'login']);
 
 Route::get('/agent/dashboard',function(){
