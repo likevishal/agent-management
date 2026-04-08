@@ -7,7 +7,7 @@
 
 <a href="/agents/create">Add Agent</a>
 
-<form method="GET" action="/agents" class="mb-3">
+<!-- <form method="GET" action="/agents" class="mb-3">
     <input 
         type="text" 
         name="search"
@@ -16,7 +16,7 @@
     >
 
     <button type="submit" class="btn btn-primary">Search</button>
-</form>
+</form> -->
 
 <table border="1">
     <tr>
@@ -55,6 +55,6 @@
 </table>
 
 <!-- 👇 Put pagination here -->
-{{ $agents->appends(['search' => $search ?? ''])->links() }}
+{{ $agents->links() }}
 
 @endsection

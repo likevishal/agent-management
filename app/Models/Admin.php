@@ -18,4 +18,8 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    public function agents() {
+        return $this->hasMany(Agent::class);
+    }
 }

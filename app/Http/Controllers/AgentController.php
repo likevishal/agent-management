@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AgentController extends Controller
 {
@@ -15,13 +16,9 @@ class AgentController extends Controller
 
         $search = $request->search;
 
-        $agents = Agent::when($search, function ($query, $search) {
-            return $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('email', 'like', '%' . $search . '%');
-            });
-        })->paginate(5);
-        return view('agents.index', compact('agents', 'search'));
+        $agents = Agent::where('admin_id', Auth::guard('admin')->id())
+                    ->paginate(5);
+        return view('agents.index', compact('agents'));
     }
 
     public function create()
@@ -41,6 +38,7 @@ class AgentController extends Controller
         ]);
 
         Agent::create([
+            'admin_id' => Auth::guard('admin')->id(),
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -53,7 +51,7 @@ class AgentController extends Controller
 
     public function edit($id)
     {
-        $agent = Agent::findOrFail($id);
+        $agent = Agent::where('admin_id',Auth::guard('admin')->id())->findOrFail($id);        
         return view('agents.edit', compact('agent'));
     }
 
@@ -81,7 +79,7 @@ class AgentController extends Controller
 
     public function destroy($id)
     {
-        $agent = Agent::findOrFail($id);
+        $agent = Agent::where('admin_id',Auth::guard('admin')->id())->findOrFail($id);
         $agent->delete();
 
         return redirect('/agents')->with('success', 'Agent deleted successfully');

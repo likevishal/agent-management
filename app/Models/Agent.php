@@ -22,4 +22,8 @@ class Agent extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function admin() {
+        return $this->belongsTo(Admin::class);
+    }
 }
