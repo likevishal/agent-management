@@ -23,15 +23,17 @@ Route::post('/admin/login',[AdminAuthController::class,'login']);
 
 //protected
 
-Route::middleware('auth:admin')->group(function(){
-    Route::get('/admin/dashboard',function(){
-        return "Admin dashboard";
-    });
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::get('/dashboard',function(){
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    Route::resource('agents', AgentController::class);
 });
 
 
-//logout 
-
+//logout
 Route::post('/admin/logout',[AdminAuthController::class,'logout']);
 
 // ADMIN LOGIN ROUTE END
@@ -45,13 +47,3 @@ Route::get('/agent/dashboard',function(){
 
 
 Route::post('/agent/logout',[AgentAuthController::class,'logout']);
-
-// Route::get('/agents',[AgentController::class,'index']);
-// Route::get('/agents/create',[AgentController::class,'create']);
-// Route::post('/agents/store',[AgentController::class,'store']);
-
-// Route::get('/agents/edit/{id}',[AgentController::class,'edit']);
-// Route::post('/agents/update/{id}',[AgentController::class,'update']);
-// Route::get('/agents/delete/{id}',[AgentController::class,'destroy']);
-
-Route::resource('agents', AgentController::class);

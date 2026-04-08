@@ -18,12 +18,12 @@ class AgentController extends Controller
 
         $agents = Agent::where('admin_id', Auth::guard('admin')->id())
                     ->paginate(5);
-        return view('agents.index', compact('agents'));
+        return view('admin.agents.index', compact('agents'));
     }
 
     public function create()
     {
-        return view('agents.create');
+        return view('admin.agents.create');
     }
 
     public static function store(Request $request)
@@ -52,7 +52,7 @@ class AgentController extends Controller
     public function edit($id)
     {
         $agent = Agent::where('admin_id',Auth::guard('admin')->id())->findOrFail($id);        
-        return view('agents.edit', compact('agent'));
+        return view('admin.agents.edit', compact('agent'));
     }
 
     public function update(Request $request, $id)

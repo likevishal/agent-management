@@ -23,7 +23,7 @@ class AdminAuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ])) {
-            return redirect('/admin/dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->with('error', 'Invalid credentials');
