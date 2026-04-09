@@ -52,9 +52,11 @@
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="btn btn-primary w-100">
+            <button type="submit" class="btn btn-primary w-100 mb-3">
                 Login
             </button>
+
+            <a href="{{ route('admin.forgot') }}">Forgot Password?</a>
 
         </form>
 

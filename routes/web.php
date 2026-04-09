@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgentAuthController;
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminForgotPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +36,16 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
 //logout
 Route::post('/admin/logout',[AdminAuthController::class,'logout']);
+
+//forgot password
+Route::get('admin/forgot-password',[AdminForgotPasswordController::class,'showForgotForm']);
+Route::post('admin/forgot-password',[AdminForgotPasswordController::class,'sendResetLink'])->name('admin.forgot');
+
+//reset password
+Route::get('/admin/reset-password/{token}',[AdminForgotPasswordController::class,'showResetForm']);
+Route::post('/admin/reset-password',[AdminForgotPasswordController::class,'resetPassword'])->name('admin.reset');
+
+
 
 // ADMIN LOGIN ROUTE END
 
