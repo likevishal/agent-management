@@ -6,6 +6,8 @@ use App\Models\Admin;
 use App\Models\PasswordResetToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminResetPasswordMail;
 
 class AdminForgotPasswordController extends Controller
 {
@@ -26,8 +28,9 @@ class AdminForgotPasswordController extends Controller
 
         $token = '12345678';
 
-        PasswordResetToken::updateOrCreate(
-            ['email' => $request->email],
+        PasswordResetToken::where('email',$request->email)->delete();
+
+        PasswordResetToken::create(            
             [
                 'email' => $request->email,
                 'token' => $token,
@@ -35,7 +38,9 @@ class AdminForgotPasswordController extends Controller
             ]
         );
 
-        return back()->with('success', "Reset Link : /admin/reset-password/$token");
+        Mail::to($request->email)->send(new AdminResetPasswordMail($token));
+
+        return back()->with('success', "Recent link sent successfully");
     }
 
     public function showResetForm($token)
