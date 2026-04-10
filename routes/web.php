@@ -52,9 +52,13 @@ Route::post('/admin/reset-password',[AdminForgotPasswordController::class,'reset
 Route::get('/agent/login',[AgentAuthController::class,'showLogin'])->name('agent.login');
 Route::post('/agent/login',[AgentAuthController::class,'login']);
 
-Route::get('/agent/dashboard',function(){
-    return "Agent Dashboard";
-})->middleware('auth:agent');
+// AGENT ROUTE START
+    Route::middleware('auth:agent')->prefix('agent')->name('agent.')->group(function(){
+        Route::get('/dashboard',function(){
+            return view('agent.dashboard');
+        })->name('dashboard');
+    });
+// AGENT ROUTE END
 
 
 Route::post('/agent/logout',[AgentAuthController::class,'logout']);
