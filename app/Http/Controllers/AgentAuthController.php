@@ -16,12 +16,14 @@ class AgentAuthController extends Controller
     public function login(Request $request)
     {
         $remember = $request->has('remember');
-        
+
         if (Auth::guard('agent')->attempt([
             'email' => $request->email,
             'password' => $request->password
         ],$remember)) {
             return redirect('/agent/dashboard');
+
+            return redirect()->route('agent.dashboard');
         }
 
         return back()->with('error', 'Invalid credentials');
