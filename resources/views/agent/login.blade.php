@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Remember Me -->
-                <!-- <div class="mb-3 form-check">
+                <div class="mb-3 form-check">
                     <input type="checkbox"
                         name="remember"
                         class="form-check-input"
@@ -51,7 +51,7 @@
                     <label class="form-check-label" for="remember">
                         Remember Me
                     </label>
-                </div> -->
+                </div>
 
                 <!-- Submit -->
                 <button type="submit" class="btn btn-primary w-100 mb-3">
