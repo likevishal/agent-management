@@ -40,7 +40,7 @@ class AdminForgotPasswordController extends Controller
 
         Mail::to($request->email)->send(new AdminResetPasswordMail($token));
 
-        return back()->with('success', "Recent link sent successfully");
+        return back()->with('success', "Reset link sent successfully");
     }
 
     public function showResetForm($token)
