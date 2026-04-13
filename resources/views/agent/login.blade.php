@@ -58,7 +58,7 @@
                     Login
                 </button>
 
-                <!-- <a href="{{ route('admin.forgot') }}">Forgot Password?</a> -->
+                <a href="{{ route('agent.forgot') }}">Forgot Password?</a>
 
             </form>
 

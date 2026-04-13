@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentAuthController;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminForgotPasswordController;
+use App\Http\Controllers\AgentForgotPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +60,9 @@ Route::post('/agent/login',[AgentAuthController::class,'login']);
         })->name('dashboard');
     });
 // AGENT ROUTE END
+
+Route::get('/agent/forgot-password',[AgentForgotPasswordController::class,'showForgotForm']);
+Route::post('/agent/forgot-password',[AgentForgotPasswordController::class,'sendResetLink'])->name('agent.forgot');
 
 
 Route::post('/agent/logout',[AgentAuthController::class,'logout']);
