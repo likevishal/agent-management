@@ -17,7 +17,8 @@ class Agent extends Authenticatable
         'email',
         'phone',
         'address',
-        'password'
+        'password',
+        'remember_token'
     ];
 
     protected $hidden = [
