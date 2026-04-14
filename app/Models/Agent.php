@@ -25,7 +25,13 @@ class Agent extends Authenticatable
         'password',
     ];
 
-    public function admin() {
+    public function admin()
+    {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
     }
 }
