@@ -59,10 +59,19 @@ Route::post('/agent/login',[AgentAuthController::class,'login']);
             return view('agent.dashboard');
         })->name('dashboard');
     });
-// AGENT ROUTE END
 
+//forgot password
 Route::get('/agent/forgot-password',[AgentForgotPasswordController::class,'showForgotForm']);
 Route::post('/agent/forgot-password',[AgentForgotPasswordController::class,'sendResetLink'])->name('agent.forgot');
+
+//reset password
+Route::get('/agent/reset-password/{token}',[AgentForgotPasswordController::class,'showResetForm']);
+Route::post('/agent/reset-password',[AgentForgotPasswordController::class,'resetPassword'])->name('agent.reset');
+
+// AGENT ROUTE END
+
+
+
 
 
 Route::post('/agent/logout',[AgentAuthController::class,'logout']);
