@@ -15,6 +15,11 @@ class CustomerController extends Controller
     public function index()
     {
         //
+        $customers = Customer::where('agent_id', Auth::guard('agent')->id())
+            ->latest()
+            ->paginate(10);
+
+        return view('agent.customers.index', compact('customers'));
     }
 
     /**
