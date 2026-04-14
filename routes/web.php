@@ -58,6 +58,8 @@ Route::post('/agent/login',[AgentAuthController::class,'login']);
         Route::get('/dashboard',function(){
             return view('agent.dashboard');
         })->name('dashboard');
+
+        Route::resource('customers',\App\Http\Controllers\Agent\CustomerController::class);
     });
 
 //forgot password
