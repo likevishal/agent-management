@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -29,6 +31,25 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'nullable|email',
+                'phone' => 'nullable',
+                'address' => 'nullable'
+            ]
+        );
+
+        Customer::create([
+            'agent_id' => Auth::guard('agent')->id(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address
+        ]);
+
+        return redirect()->route('agent.customers.index')->with('success', 'Customers created');
     }
 
     /**
