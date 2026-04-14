@@ -8,7 +8,16 @@ class Customer extends Model
 {
     //
 
-    public function agent() {
+    protected $fillable = [
+        'agent_id',
+        'name',
+        'email',
+        'phone',
+        'address'
+    ];
+
+    public function agent()
+    {
         return $this->belongsTo(Agent::class);
     }
 }
