@@ -22,6 +22,13 @@
                         Dashboard
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('agent.customers.index') }}"
+                        class="nav-link text-white {{ request()->routeIs('agent.customers.*') ? 'bg-secondary' : '' }}">
+                        Customers
+                    </a>
+                </li>
                
 
             </ul>
